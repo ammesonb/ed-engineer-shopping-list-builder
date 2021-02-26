@@ -1,5 +1,5 @@
 """
-Point Defence
+Limpet Controller
 """
 from ed_engineer_shopping_list_builder.ship_components.base_component import (
     BaseComponent,
@@ -8,19 +8,15 @@ from ed_engineer_shopping_list_builder.classification import Classification
 from ed_engineer_shopping_list_builder.modification import Modification
 
 
-class PointDefence(BaseComponent):
+class LimpetController(BaseComponent):
     """
-    Point Defence
+    Generic Limpet Controller
     """
 
-    name = "Point Defence"
-    component_classification = Classification.UTILITY
+    component_classification = Classification.OPTIONAL_INTERNAL
 
     _modifications = [
-        Modification.AMMO_CAPACITY,
         Modification.LIGHTWEIGHT,
         Modification.REINFORCED,
         Modification.SHIELDED,
     ]
-
-    _default_modification = Modification.AMMO_CAPACITY

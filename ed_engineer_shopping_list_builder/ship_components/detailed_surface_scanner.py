@@ -6,7 +6,6 @@ from ed_engineer_shopping_list_builder.ship_components.base_component import (
 )
 from ed_engineer_shopping_list_builder.classification import Classification
 from ed_engineer_shopping_list_builder.modification import Modification
-from ed_engineer_shopping_list_builder.effect import ExperimentalEffect
 
 
 class DetailedSurfaceScanner(BaseComponent):

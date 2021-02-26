@@ -1,47 +1,13 @@
 #!/usr/bin/env python3
-from dataclasses import dataclass
+"""
+Builds a shopping list for ED engineer
+"""
 from os import path
 import sys
-from typing import List, Dict, Any, Optional
+from typing import Dict
 
 from ed_engineer_shopping_list_builder import inputs
 from ed_engineer_shopping_list_builder.ship import Ship, ALL_COMPONENTS
-from ed_engineer_shopping_list_builder.ship_components.base_component import (
-    BaseComponent,
-)
-
-
-@dataclass
-class Component:
-    """
-    An engineerable component
-    """
-
-    name: str
-    modification: str
-    max_modification_grade: int
-    effect: str
-    quantity: int
-
-
-class DuplicatedList:
-    """
-    A list that adds multiple things at one
-    """
-
-    def __init__(self, quantity: int):
-        self._quantity = quantity
-        self.items = []
-
-    def append(self, item: Any, times: int = 1):
-        """
-        Appends an item to this list
-
-        In some cases, we will want to add say, 2 sets of G5 items, for a total of 20
-        """
-        for _ in range(self._quantity):
-            for time in range(0, times):
-                self.items.append(item)
 
 
 def make_shopping_list():
@@ -170,35 +136,7 @@ def save_shopping_list(ship: Ship, cmdr_name: str, grade_counts: Dict[int, int])
     output_handle = open(output_file, "w")
     output_handle.write(shopping_list + "\n")
     output_handle.close()
-    exit(0)
-
-
-def format_component_to_strings(
-    commander_name: str,
-    component: BaseComponent,
-    quantity: int,
-    grade_counts: Dict[int, int],
-) -> List[str]:
-    """
-    Formats a component configuration into a string
-    """
-    command_base = f"{commander_name}:G{{grade}} [{component.name}] {{modification}}"
-    shopping_list_entries = DuplicatedList(quantity)
-
-    for grade in range(1, component.max_modification_grade + 1):
-        shopping_list_entries.append(
-            command_base.format(
-                grade=grade, modification=component.selected_modification
-            ),
-            grade_counts[grade],
-        )
-
-    if component.selected_effect:
-        shopping_list_entries.append(
-            command_base.format(grade="", modification=component.effect)
-        )
-
-    return shopping_list_entries.items
+    sys.exit(0)
 
 
 if __name__ == "__main__":

@@ -4,6 +4,7 @@ A list of modifications
 from ed_engineer_shopping_list_builder.printable_enum import PrintableEnum
 
 
+# pylint: disable=too-few-public-methods
 class Modification(PrintableEnum):
     """
     Component modifications
