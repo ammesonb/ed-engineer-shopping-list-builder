@@ -135,7 +135,7 @@ class Ship:
         Removes a component from the ship
         """
         if is_component_unique(component):
-            self.outfitted[component.name] = None
+            del self.outfitted[component.name]
         else:
             self.outfitted[component.name].remove(component)
 
@@ -144,9 +144,11 @@ class Ship:
         """
         Returns a list of all components
         """
-        outfitted = self.outfitted.values()
+        outfitted = list(self.outfitted.keys())
+        outfitted.sort()
         components = []
-        for component in outfitted:
+        for component_name in outfitted:
+            component = self.outfitted[component_name]
             if isinstance(component, list):
                 components.extend(component)
             else:
