@@ -68,6 +68,9 @@ from ed_engineer_shopping_list_builder.ship_components.pulse_laser import PulseL
 from ed_engineer_shopping_list_builder.ship_components.railgun import RailGun
 from ed_engineer_shopping_list_builder.ship_components.refinery import Refinery
 from ed_engineer_shopping_list_builder.ship_components.sensors import Sensors
+from ed_engineer_shopping_list_builder.ship_components.shield_booster import (
+    ShieldBooster,
+)
 from ed_engineer_shopping_list_builder.ship_components.shield_cell_bank import (
     ShieldCellBank,
 )

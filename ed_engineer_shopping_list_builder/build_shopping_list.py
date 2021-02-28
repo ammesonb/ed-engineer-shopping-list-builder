@@ -14,7 +14,7 @@ def make_shopping_list():
     """
     Makes the actual shopping list
     """
-    cmdr = get_cmdr()
+    cmdr = get_cmdr(sys.argv)
     count_per_grade = get_grade_counts()
 
     ship = Ship()
@@ -32,14 +32,15 @@ def make_shopping_list():
             summarize_ship(ship)
         elif selected_action == "Done":
             summarize_ship(ship)
-            save_shopping_list(ship, cmdr, count_per_grade)
+            if save_shopping_list(ship, cmdr, count_per_grade):
+                break
 
 
-def get_cmdr() -> str:
+def get_cmdr(argv) -> str:
     """
     Sets commander
     """
-    return sys.argv[1] if len(sys.argv) > 1 else input("CMDR name: ")
+    return argv[1] if len(argv) > 1 else inputs.single_prompt("CMDR name")
 
 
 def get_grade_counts() -> Dict[int, int]:
@@ -116,9 +117,12 @@ def summarize_ship(ship: Ship):
     print(ship.summarize())
 
 
-def save_shopping_list(ship: Ship, cmdr_name: str, grade_counts: Dict[int, int]):
+def save_shopping_list(
+    ship: Ship, cmdr_name: str, grade_counts: Dict[int, int]
+) -> bool:
     """
     Save the ship configuration to an output
+    Returns True if saved and should exit, False otherwise
     """
     output_file = inputs.single_prompt(
         "Output ship to file? (leave BLANK to return to editing) ",
@@ -126,17 +130,25 @@ def save_shopping_list(ship: Ship, cmdr_name: str, grade_counts: Dict[int, int])
     )
 
     if not output_file:
-        return
+        return False
 
     if path.isfile(output_file):
         if not inputs.check_confirmation("Overwrite file?"):
-            return
+            return False
 
     shopping_list = ship.to_shopping_list(cmdr_name, grade_counts)
+    save_data_to_file(output_file, shopping_list)
+
+    return True
+
+
+def save_data_to_file(output_file: str, shopping_list: str):
+    """
+    Saves data to a file
+    """
     output_handle = open(output_file, "w")
     output_handle.write(shopping_list + "\n")
     output_handle.close()
-    sys.exit(0)
 
 
 if __name__ == "__main__":

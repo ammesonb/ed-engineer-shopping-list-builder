@@ -63,7 +63,11 @@ class BaseComponent:
         .
         """
         self.selected_modification = inputs.make_choice(
-            "modification", [None] + self._modifications, self._default_modification
+            "modification",
+            [None] + [str(modification) for modification in self._modifications],
+            str(self.selected_modification) or str(self._default_modification)
+            if self._default_modification
+            else None,
         )
 
         if self.selected_modification:
@@ -74,7 +78,11 @@ class BaseComponent:
         .
         """
         self.selected_effect = inputs.make_choice(
-            "effect", [None] + self._effects, self._default_effect
+            "effect",
+            [None] + [str(effect) for effect in self._effects],
+            str(self.selected_effect) or str(self._default_effect)
+            if self._default_effect
+            else None,
         )
 
     def to_shopping_list(self, cmdr_name: str, grade_counts: Dict[int, int]) -> str:
