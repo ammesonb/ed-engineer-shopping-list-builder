@@ -1,5 +1,5 @@
 black==20.8b1
-inquirer
+inquirer==2.7.0
 pre-commit==2.10.1
 pylint==2.7.0
 pytest-cov==2.11.1
