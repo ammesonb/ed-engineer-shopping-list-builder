@@ -76,7 +76,7 @@ def test_print_summary(monkeypatch, capsys):
 
     summarize_engineers.print_component_summary({})
     printed = capsys.readouterr()
-    assert printed.out == "a description", "Ship summary returned"
+    assert printed.out == "a description\n", "Ship summary returned"
 
 
 def test_summarize_engineers(monkeypatch):
