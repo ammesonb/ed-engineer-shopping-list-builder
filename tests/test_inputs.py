@@ -8,6 +8,9 @@ from ed_engineer_shopping_list_builder.utils import counter_wrapper
 
 
 def test_make_choice(monkeypatch):
+    """
+    .
+    """
     # pylint: disable=unused-argument
     @counter_wrapper
     def prompt(questions, theme):
@@ -18,6 +21,23 @@ def test_make_choice(monkeypatch):
 
     monkeypatch.setattr(inquirer, "prompt", prompt)
     assert inputs.make_choice("q", ["a"], "a") == "answer", "Expected answer returned"
+    assert prompt.counter == 1, "Prompt called"
+
+
+def test_make_choices(monkeypatch):
+    """
+    .
+    """
+    # pylint: disable=unused-argument
+    @counter_wrapper
+    def prompt(questions, theme):
+        """
+        .
+        """
+        return {"q": "answer"}
+
+    monkeypatch.setattr(inquirer, "prompt", prompt)
+    assert inputs.make_choices("q", ["a"]) == "answer", "Expected answer returned"
     assert prompt.counter == 1, "Prompt called"
 
 
@@ -45,6 +65,7 @@ def test_single_prompt(monkeypatch):
     """
     valid = lambda _, x: x == "foo"
 
+    # pylint: disable=unused-argument,protected-access
     @counter_wrapper
     def prompt(questions: list, theme):
         """
@@ -72,11 +93,12 @@ def test_get_action(monkeypatch):
     assert inputs.get_action() == "add", "Action returned"
 
 
-def test_single_prompt(monkeypatch):
+def test_check_confirmation(monkeypatch):
     """
     .
     """
 
+    # pylint: disable=unused-argument
     @counter_wrapper
     def prompt(questions: list, theme):
         """

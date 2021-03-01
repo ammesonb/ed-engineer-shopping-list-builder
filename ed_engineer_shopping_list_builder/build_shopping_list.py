@@ -7,7 +7,10 @@ import sys
 from typing import Dict
 
 from ed_engineer_shopping_list_builder import inputs
-from ed_engineer_shopping_list_builder.ship import Ship, ALL_COMPONENTS
+from ed_engineer_shopping_list_builder.ship import Ship
+from ed_engineer_shopping_list_builder.ship_components import ALL_COMPONENTS
+
+LAST_MOD_ADDED = None
 
 
 def make_shopping_list():
@@ -61,15 +64,19 @@ def add_component(ship: Ship):
     """
     Adds a component to the ship
     """
+    global LAST_MOD_ADDED
     component_map = {component.name: component for component in ALL_COMPONENTS}
     options = list(component_map.keys())
     if "" in options:
         options.remove("")
-    options.sort()
+    options.sort(
+        key=lambda option: str(component_map[option].component_classification) + option
+    )
 
-    component = inputs.make_choice("component", [None] + options, None)
+    component = inputs.make_choice("component", [None] + options, LAST_MOD_ADDED)
 
     if component:
+        LAST_MOD_ADDED = component
         ship.add_component(component_map[component]())
 
 
@@ -83,7 +90,9 @@ def update_component(ship: Ship):
     options = list(component_map.keys())
     if "" in options:
         options.remove("")
-    options.sort()
+    options.sort(
+        key=lambda option: str(component_map[option].component_classification) + option
+    )
 
     component = inputs.make_choice("component", [None] + options, None)
 
@@ -102,7 +111,9 @@ def remove_component(ship: Ship):
     options = list(component_map.keys())
     if "" in options:
         options.remove("")
-    options.sort()
+    options.sort(
+        key=lambda option: str(component_map[option].component_classification) + option
+    )
 
     component = inputs.make_choice("component", [None] + options, None)
 

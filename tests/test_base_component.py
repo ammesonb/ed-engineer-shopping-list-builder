@@ -158,20 +158,20 @@ def test_to_shopping_list(monkeypatch):
     plant.selected_effect = ExperimentalEffect.MONSTERED
     shopping_list = plant.to_shopping_list("cmdr", {i: i for i in range(1, 6)})
     assert shopping_list == (
-        f'"cmdr:G1 [Power Plant] Armoured",'
-        + f'"cmdr:G2 [Power Plant] Armoured",' * 2
-        + f'"cmdr:G3 [Power Plant] Armoured",' * 3
-        + f'"cmdr:G4 [Power Plant] Armoured",' * 4
-        + f'"cmdr:G [Power Plant] Monstered"'
+        '"cmdr:G1 [Power Plant] Armoured",'
+        + '"cmdr:G2 [Power Plant] Armoured",' * 2
+        + '"cmdr:G3 [Power Plant] Armoured",' * 3
+        + '"cmdr:G4 [Power Plant] Armoured",' * 4
+        + '"cmdr:G [Power Plant] Monstered"'
     ), "Shopping list for modification and effect correct"
 
     plant.selected_effect = None
     shopping_list = plant.to_shopping_list("cmdr", {i: i for i in range(1, 6)})
     assert shopping_list == (
-        f'"cmdr:G1 [Power Plant] Armoured",'
-        + f'"cmdr:G2 [Power Plant] Armoured",' * 2
-        + f'"cmdr:G3 [Power Plant] Armoured",' * 3
-        + f'"cmdr:G4 [Power Plant] Armoured",' * 4
+        '"cmdr:G1 [Power Plant] Armoured",'
+        + '"cmdr:G2 [Power Plant] Armoured",' * 2
+        + '"cmdr:G3 [Power Plant] Armoured",' * 3
+        + '"cmdr:G4 [Power Plant] Armoured",' * 4
     ).rstrip(","), "Shopping list for only modification correct"
 
     plant.selected_effect = ExperimentalEffect.MONSTERED
@@ -179,7 +179,7 @@ def test_to_shopping_list(monkeypatch):
     plant.max_modification_grade = 0
     shopping_list = plant.to_shopping_list("cmdr", {i: i for i in range(1, 6)})
     assert shopping_list == (
-        f'"cmdr:G [Power Plant] Monstered"'
+        '"cmdr:G [Power Plant] Monstered"'
     ), "Shopping list for only effect correct"
 
 

@@ -132,3 +132,5 @@ dmypy.json
 */*.pem
 
 .coverage
+# A script for generating the engineer python files, because I am lazy
+engineers/gen_engineer.py

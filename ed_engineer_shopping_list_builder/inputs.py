@@ -9,11 +9,20 @@ from inquirer.themes import GreenPassion
 
 def make_choice(kind: str, options: List[str], default: str):
     """
-    .
+    Select a single entry from a set of options
     """
     return inquirer.prompt(
         [inquirer.List(kind, f"Select {kind}", options, default, carousel=True)],
         theme=GreenPassion(),
+    )[kind]
+
+
+def make_choices(kind: str, options: List[str]):
+    """
+    Select any number of choices from a list of options
+    """
+    return inquirer.prompt(
+        [inquirer.Checkbox(kind, f"Select {kind}", options)], theme=GreenPassion()
     )[kind]
 
 

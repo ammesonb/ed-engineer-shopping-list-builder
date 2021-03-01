@@ -2,6 +2,7 @@
 Test ship functionality
 """
 
+from ed_engineer_shopping_list_builder import utils
 from ed_engineer_shopping_list_builder.modification import Modification
 from ed_engineer_shopping_list_builder.effect import ExperimentalEffect
 from ed_engineer_shopping_list_builder.ship import Ship, is_component_unique
@@ -76,64 +77,17 @@ def test_summarize(monkeypatch):
     """
     ship = Ship()
 
-    monkeypatch.setattr(BaseComponent, "configure", lambda self: None)
-    power = PowerPlant()
-    power.max_modification_grade = 4
-    power.selected_modification = Modification.ARMOURED
-    power.selected_effect = ExperimentalEffect.MONSTERED
-
-    beam = BeamLaser()
-    beam.max_modification_grade = 5
-    beam.selected_modification = Modification.EFFICIENT_WEAPON
-    beam.selected_effect = ExperimentalEffect.THERMAL_VENT
-
-    shield = ShieldGenerator()
-    shield.max_modification_grade = 5
-    shield.selected_effect = ExperimentalEffect.FAST_CHARGE
-
-    chaff = ChaffLauncher()
-    chaff.max_modification_grade = 2
-    chaff.selected_modification = Modification.AMMO_CAPACITY
-
-    ship.add_component(power)
-    ship.add_component(beam)
-    ship.add_component(shield)
-    ship.add_component(chaff)
-
-    summary = ship.summarize()
-    assert summary == "\n".join(
-        [
-            "-" * 40,
-            "CORE",
-            "-" * 40,
-            "",
-            str(power),
-            "",
-            "",
-            "-" * 40,
-            "HARDPOINT",
-            "-" * 40,
-            "",
-            str(beam),
-            "",
-            "",
-            "-" * 40,
-            "OPTIONAL INTERNAL",
-            "-" * 40,
-            "",
-            str(shield),
-            "",
-            "",
-            "-" * 40,
-            "UTILITY",
-            "-" * 40,
-            "",
-            str(chaff),
-            "",
-            "",
-            "",
-        ]
+    # pylint: disable=unused-argument
+    monkeypatch.setattr(
+        utils, "organize_components_by_classification", lambda components: []
     )
+    monkeypatch.setattr(
+        utils,
+        "get_component_summary_by_classification",
+        lambda components, func: "a description",
+    )
+
+    assert ship.summarize() == "a description", "Ship summary returned"
 
 
 def test_to_shopping_list(monkeypatch):

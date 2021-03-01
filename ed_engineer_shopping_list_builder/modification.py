@@ -22,7 +22,7 @@ class Modification(PrintableEnum):
     EFFICIENT_WEAPON = "Efficient Weapon"
     ENGINE_FOCUSED = "Engine Focused"
     EXPANDED_FSD_INTERDICTOR_CAPTURE_ARC = "Expanded FSD Interdictor Capture Arc"
-    ENHANCED_LOW_POWER_SHIELDS = "Enhanced, Enhanced, Low Power Shields"
+    ENHANCED_LOW_POWER_SHIELDS = "Enhanced, Low Power Shields"
     EXPANDED_PROBE_SCANNING_RADIUS = "Expanded Probe Scanning Radius"
     FAST_SCANNER = "Fast Scanner"
     FASTER_FSD_BOOT_SEQUENCE = "Faster FSD Boot Sequence"

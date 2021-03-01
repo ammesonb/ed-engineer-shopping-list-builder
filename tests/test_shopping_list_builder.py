@@ -226,12 +226,6 @@ def test_make_shopping_list(monkeypatch):
         """
 
     @counter_wrapper
-    def review(outfitted_ship):
-        """
-        .
-        """
-
-    @counter_wrapper
     def summarize(outfitted_ship):
         """
         .
