@@ -1,4 +1,4 @@
-black==21.4b0
+black==21.4b2
 inquirer==2.7.0
 pre-commit==2.12.1
 pylint==2.8.1
