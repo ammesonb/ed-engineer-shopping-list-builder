@@ -3,5 +3,5 @@ inquirer==3.4.1
 pre-commit==4.6.0
 pylint==4.0.6
 pytest-cov==7.1.0
-pytest==8.2.1
+pytest==9.1.1
 pyyaml==6.0.1
